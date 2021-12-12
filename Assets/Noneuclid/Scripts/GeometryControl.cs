@@ -4,6 +4,8 @@
 public class GeometryControl : MonoBehaviour
 {
     public enum Geometry { Euclidean = 0, Elliptic = 1, Hyperbolic = -1 };
+    public enum CurvatureGrowing { Enabled = 1, Disabled = 2 };
+
     public Geometry geometry;
     [Range(0.001f, 1.0f)]
     public float globalScale = 0.1f;
