@@ -7,6 +7,7 @@ public class LaserBeam
     Vector3 pos, dir;
 
     public GameObject laserObj;
+    public bool goalReached = false;
     LineRenderer laser;
     List<Vector3> laserIndicies = new List<Vector3>();
 
@@ -38,17 +39,16 @@ public class LaserBeam
 
     void CastRay(Vector3 pos, Vector3 dir, LineRenderer laser)
     {
-        laserIndicies.Add(pos);
+        addLaserIndex(pos);
         Ray ray = new Ray(pos, dir);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 30, 1))
         {
-            laserIndicies.Add(hit.point);
-            UpdateLaser();
+            CheckHit(hit, dir, laser);
         }
         else
         {
-            laserIndicies.Add(ray.GetPoint(30));
+            addLaserIndex(ray.GetPoint(30));
             UpdateLaser();
         }
     }
@@ -62,6 +62,51 @@ public class LaserBeam
             laser.SetPosition(count, idx);
             count ++;
         }
+    }
+
+    void CheckHit(RaycastHit hitInfo, Vector3 direction, LineRenderer laser)
+    {
+        if (hitInfo.collider.tag == "Mirror")
+        {
+            Vector3 pos = hitInfo.point;
+            Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
+
+            CastRay(pos, dir, laser);
+        }
+        else
+        {
+            addLaserIndex(hitInfo.point);
+            UpdateLaser();
+        }
+
+        if (hitInfo.collider.tag == "Goal")
+        {
+            goalReached = true;
+        }
+    
+    }
+
+    void addLaserIndex(Vector3 next)
+    {
+        const float resolution = 0.1f;
+        if (laserIndicies.Count > 0)
+        {
+            Vector3 last = laserIndicies[laserIndicies.Count -1];
+            Vector3 difference = next - last;
+            float distance = difference.magnitude;
+            Vector3 dir = difference.normalized;
+            for (float i = resolution; i <= distance; i += resolution)
+            {
+                laserIndicies.Add(last + i * dir);
+            }
+            laserIndicies.Add(next);
+        }
+        else
+        {
+            laserIndicies.Add(next);
+        }
+        
+    
     }
 
 }
