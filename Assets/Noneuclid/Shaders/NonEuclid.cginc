@@ -150,7 +150,7 @@ void geomNonEuclid(
 	stream.RestartStrip();
 
 	// in elliptic geometry antipodal points are equivalent so we render each point twice
-	if (LorentzSign > 0.001)
+	/*if (LorentzSign > 0.001)
 	{
 		float4x4 VP = ProjMat() * ViewMat();
 
@@ -167,7 +167,7 @@ void geomNonEuclid(
 		}
 
 		stream.RestartStrip();
-	}
+	}*/
 }
 
 #endif // NONEUCLID_INCLUDED
