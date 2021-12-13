@@ -28,6 +28,7 @@ namespace Assets.Noneuclid.Scripts
 			{
 				move = move + new Vector3(0, 0, -1);
 			}
+			move.y = 0;
 			move.Normalize();
 			transform.Translate(move * dt * moveSpeed);
 

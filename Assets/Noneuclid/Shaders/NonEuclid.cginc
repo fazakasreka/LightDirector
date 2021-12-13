@@ -133,9 +133,8 @@ v2f vertNonEuclid(appdata v)
 	o.L = normalize(_WorldSpaceLightPos0.xyz - wPos * _WorldSpaceLightPos0.w);
 	o.V = normalize(_WorldSpaceCameraPos.xyz - wPos);
 #endif
-
+	//o.color = v.color;
 	o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-
 	return o;
 }
 
