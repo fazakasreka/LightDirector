@@ -12,13 +12,15 @@ public class FloorMaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int x = spacingbetween; x < xWidth * spacingbetween; x += spacingbetween)
+        for (int x = 0; x < xWidth * spacingbetween; x += spacingbetween)
         {
-            for (int z = spacingbetween; z < zWidth * spacingbetween; z += spacingbetween)
+            for (int z = 0; z < zWidth * spacingbetween; z += spacingbetween)
             {
-                print(x.ToString() + z.ToString());
+                /*print(x.ToString() + z.ToString());
                 Transform newgate = GameObject.Instantiate(floorPrefab);
-                newgate.transform.Translate(new Vector3(x, 0, z));
+                newgate.transform.Translate(new Vector3(x, 0, z));*/
+                Transform newgate = GameObject.Instantiate(floorPrefab);
+                newgate.transform.Translate(new Vector3(x, 0, -z));
             }
         }
     }

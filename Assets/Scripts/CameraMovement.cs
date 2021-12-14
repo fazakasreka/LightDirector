@@ -9,8 +9,10 @@ namespace Assets.Noneuclid.Scripts
         // Update is called once per frame
         void Update()
         {
-			float moveSpeed = 10;
+
 			float dt = Time.deltaTime;
+
+			/*float moveSpeed = 10;
 			Vector3 move = new Vector3(0, 0, 0);
 			if (Input.GetAxis("Horizontal") < 0)
 			{
@@ -30,7 +32,7 @@ namespace Assets.Noneuclid.Scripts
 			}
 			move.y = 0;
 			move.Normalize();
-			transform.Translate(move * dt * moveSpeed);
+			transform.Translate(move * dt * moveSpeed); */
 
 			float rotateSpeed = 2.0f;
 			float mx = Input.GetAxis("Mouse X");
