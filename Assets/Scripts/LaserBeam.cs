@@ -49,20 +49,9 @@ public class LaserBeam
         else
         {
             addLaserIndex(ray.GetPoint(30));
-            UpdateLaser();
         }
     }
 
-    void UpdateLaser()
-    {
-        int count = 0;
-        laser.positionCount = laserIndicies.Count;
-        foreach (Vector3 idx in laserIndicies) 
-        {
-            laser.SetPosition(count, idx);
-            count ++;
-        }
-    }
 
     void CheckHit(RaycastHit hitInfo, Vector3 direction, LineRenderer laser)
     {
@@ -80,7 +69,6 @@ public class LaserBeam
         else
         {
             addLaserIndex(hitInfo.point);
-            UpdateLaser();
         }
 
         if (hitInfo.collider.tag == "Goal")
@@ -111,8 +99,19 @@ public class LaserBeam
         {
             laserIndicies.Add(next);
         }
-        
+        UpdateLaser();
     
+    }
+
+    void UpdateLaser()
+    {
+        int count = 0;
+        laser.positionCount = laserIndicies.Count;
+        foreach (Vector3 idx in laserIndicies)
+        {
+            laser.SetPosition(count, idx);
+            count++;
+        }
     }
 
 }
