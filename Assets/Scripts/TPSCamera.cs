@@ -16,7 +16,7 @@ public class TPSCamera : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (!Input.GetMouseButton(0) && Input.GetMouseButton(1))
+		if (Input.GetMouseButton(1))
 		{
 			float mouseY = Input.GetAxis("Mouse Y");
 			if (cameraHeight + mouseY > 0 && cameraHeight + mouseY < 20)
