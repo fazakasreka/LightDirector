@@ -24,5 +24,9 @@ public class LaserMaker : MonoBehaviour
         {
             LevelCompletedMenu.SetActive(true);
         }
+        if (!beam.goalReached)
+        {
+            LevelCompletedMenu.SetActive(false);
+        }
     }
 }

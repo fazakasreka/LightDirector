@@ -73,6 +73,10 @@ public class LaserBeam
 
             CastRay(pos, dir, laser);
         }
+        else if (hitInfo.collider.tag == "LaserIgnore")
+        {
+            CastRay(hitInfo.point + direction.normalized*0.05f, direction, laser);
+        }
         else
         {
             addLaserIndex(hitInfo.point);
@@ -86,6 +90,8 @@ public class LaserBeam
     
     }
 
+
+    //add with resolution, becaus the line is not straight in curved spaces
     void addLaserIndex(Vector3 next)
     {
         const float resolution = 0.1f;

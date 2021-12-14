@@ -16,9 +16,12 @@ public class TPSCamera : MonoBehaviour {
 	}
 	
 	void Update () {
-		float mouseY = Input.GetAxis ("Mouse Y");
-		if (cameraHeight + mouseY > 0 && cameraHeight + mouseY < 20) 
-			cameraHeight += mouseY;
+		if (!Input.GetMouseButton(0))
+		{
+			float mouseY = Input.GetAxis("Mouse Y");
+			if (cameraHeight + mouseY > 0 && cameraHeight + mouseY < 20)
+				cameraHeight += mouseY;
+		}
 		float mouseScroll = Input.GetAxis ("Mouse ScrollWheel");
 		camDistance += mouseScroll;
 

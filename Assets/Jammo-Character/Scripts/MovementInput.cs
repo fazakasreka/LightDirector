@@ -64,8 +64,7 @@ public class MovementInput : MonoBehaviour {
 
     void PlayerMoveAndRotation() {
 		InputX = Input.GetAxis ("Horizontal");
-		InputZ = Input.GetAxis ("Vertical");
-		if(InputZ<0) InputZ=0;
+		InputZ = Input.GetAxis("Vertical");
 
 		var camera = Camera.main;
 		var forward = cam.transform.forward;
@@ -78,10 +77,14 @@ public class MovementInput : MonoBehaviour {
 		right.Normalize ();
 
 		desiredMoveDirection = forward * InputZ + (right * InputX).normalized * 0.01f;
+		Vector3 rotateDirection = (right * InputX).normalized * 0.01f;
 
 		if (blockRotationPlayer == false) {
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
-            controller.Move(desiredMoveDirection * Time.deltaTime * Velocity);
+			if(InputZ == 0)
+            {
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotateDirection), desiredRotationSpeed);
+			}
+			controller.Move(desiredMoveDirection * Time.deltaTime * Velocity);
 		}
 	}
 
@@ -104,8 +107,8 @@ public class MovementInput : MonoBehaviour {
 
 	void InputMagnitude() {
 		//Calculate Input Vectors
-		InputX = Input.GetAxis ("Horizontal");
-		InputZ = Input.GetAxis ("Vertical");
+		InputX = Input.GetAxis("Horizontal");
+		InputZ = Input.GetAxis("Vertical");
 
 		//anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
 		//anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
